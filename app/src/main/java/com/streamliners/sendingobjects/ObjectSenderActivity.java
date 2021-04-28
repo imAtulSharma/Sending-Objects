@@ -1,0 +1,165 @@
+package com.streamliners.sendingobjects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Toast;
+
+import com.streamliners.sendingobjects.databinding.ActivityObjectSenderBinding;
+import com.streamliners.sendingobjects.model.Student;
+
+import java.io.Serializable;
+
+public class ObjectSenderActivity extends AppCompatActivity {
+    ActivityObjectSenderBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Initialising binding object
+        binding = ActivityObjectSenderBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
+
+        // To set the title of the activity
+        setTitle("Enter Details");
+
+        setupHideErrorForEditText();
+    }
+
+    /**
+     * to set text watchers to the text field and hide the errors when text changes
+     */
+    private void setupHideErrorForEditText() {
+        // Text watcher for name text field
+        binding.nameTextField.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.nameTextField.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // Text watcher for mobile number text field
+        binding.phoneNumberTextField.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.phoneNumberTextField.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // Text watcher for roll number text field
+        binding.rollNumberTextField.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.rollNumberTextField.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    /**
+     * to get the information about the student using user input
+     * @return {@link Student} class object
+     */
+    private Student getInfo() {
+        // Name of the student
+        String name = binding.nameTextField.getEditText().getText().toString().trim();
+        if (name.isEmpty()) {
+            binding.nameTextField.setError("Please enter name");
+            return null;
+        }
+
+        // Gender of the student
+        String gender;
+
+        // Type of the item chosen in the radio button
+        int type = binding.genderRadioGroup.getCheckedRadioButtonId();
+        if (type == binding.femaleRadioButton.getId()) {
+            gender = "Female";
+        } else if (type == binding.maleRadioButton.getId()) {
+            gender = "Male";
+        } else {
+            Toast.makeText(this, "Please select gender!", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        // Roll number of the student
+        String rollNumber = binding.rollNumberTextField.getEditText().getText().toString().trim();
+        if (rollNumber.isEmpty()) {
+            binding.rollNumberTextField.setError("Please enter roll number");
+            return null;
+        } else if (!rollNumber.matches("^\\d{2}[a-zA-Z]*\\d{3}")) {
+            binding.rollNumberTextField.setError("Please enter valid roll number");
+            return null;
+        }
+
+        // 10-digit Mobile number of the student
+        String mobileNumber= binding.phoneNumberTextField.getEditText().getText().toString().trim();
+        if (mobileNumber.isEmpty()) {
+            binding.phoneNumberTextField.setError("Please enter mobile number");
+            return null;
+        } else if (!mobileNumber.matches("^\\d{10}")) {
+            binding.phoneNumberTextField.setError("Please enter valid mobile number");
+            return null;
+        }
+
+        Student student = new Student(name, mobileNumber, rollNumber, gender);
+        return student;
+    }
+
+    /**
+     * to sent the data to another activity
+     * @param view view of the user interface
+     */
+    public void sendData(View view) {
+        // Taking student object with entered information
+        Student student = getInfo();
+
+        // Checking student if null then returns
+        if (student == null) {
+            return;
+        }
+
+        Intent intent = new Intent(this, ObjectViewerActivity.class);
+        intent.putExtra(Constants.STUDENT_KEY, student);
+
+        startActivity(intent);
+    }
+}
+
