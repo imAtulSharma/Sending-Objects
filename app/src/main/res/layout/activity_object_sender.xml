@@ -27,7 +27,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,13 +46,15 @@
                 android:id="@+id/male_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male"/>
+                android:text="@string/male_radio_button_title"
+                android:imeOptions="actionNext"/>
 
             <RadioButton
                 android:id="@+id/female_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female"/>
+                android:text="@string/female_radio_button_title"
+                android:imeOptions="actionNext"/>
         </RadioGroup>
 
         <!-- roll number of the student text field -->
@@ -71,7 +74,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="10"/>
+                android:maxLength="10"
+                android:imeOptions="actionSend"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,8 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:onClick="sendData"
-            android:text="save"
+            android:text="@string/send_button_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone_number_text_field" />
 

@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.streamliners.sendingobjects.databinding.ActivityObjectSenderBinding;
@@ -31,7 +34,36 @@ public class ObjectSenderActivity extends AppCompatActivity {
         // To set the title of the activity
         setTitle("Enter Details");
 
+        setupOnClickListenerForButton();
+        setupActionListener();
         setupHideErrorForEditText();
+    }
+
+    /**
+     *  To setup on click listener for button
+     */
+    private void setupOnClickListenerForButton() {
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData();
+            }
+        });
+    }
+
+    /**
+     * To setup the listener for the mobile text field
+     */
+    private void setupActionListener() {
+        binding.phoneNumberTextField.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    sendData();
+                }
+                return true;
+            }
+        });
     }
 
     /**
@@ -145,9 +177,8 @@ public class ObjectSenderActivity extends AppCompatActivity {
 
     /**
      * to sent the data to another activity
-     * @param view view of the user interface
      */
-    public void sendData(View view) {
+    public void sendData() {
         // Taking student object with entered information
         Student student = getInfo();
 
