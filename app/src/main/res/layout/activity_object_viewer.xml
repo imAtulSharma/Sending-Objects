@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -45,6 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/show_name_text_field">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -65,6 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/show_gender_text_field">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -85,6 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/show_roll_number_text_field">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
