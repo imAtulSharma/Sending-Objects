@@ -39,9 +39,9 @@ public class ObjectViewerActivity extends AppCompatActivity {
         }
 
         // Showing data in the text fields
-        binding.showNameTextField.getEditText().setText(student.getName());
-        binding.showGenderTextField.getEditText().setText(student.getGender());
-        binding.showRollNumberTextField.getEditText().setText(student.getRollNumber());
-        binding.showMobileNumberTextField.getEditText().setText(student.getMobileNumber());
+        binding.showNameTextField.setText(student.getName());
+        binding.showGenderTextField.setText(student.getGender());
+        binding.showRollNumberTextField.setText(student.getRollNumber());
+        binding.showMobileNumberTextField.setText(student.getMobileNumber());
     }
 }
